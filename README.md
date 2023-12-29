@@ -1,1 +1,1 @@
-# ExpenseFlow | React - React Router DOM - Styled Components - Tankstack query - Zustand - Supabase - Vite
+# ExpenseFlow | React - TypeScript - React Router DOM - Styled Components - Tankstack query - Zustand - Supabase - Vite
