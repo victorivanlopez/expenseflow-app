@@ -1,8 +1,10 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AppRouter } from './router';
+
+const router = createBrowserRouter(AppRouter);
 
 export const App = () => {
   return (
-    <>
-      <h1>Expense Flow App</h1>
-    </>
+    <RouterProvider router={router} />
   )
 }
