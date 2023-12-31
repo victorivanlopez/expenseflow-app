@@ -1,6 +1,6 @@
 import { AuthLayout } from '../auth/layout';
 import { AuthRoutes } from '../auth/routes';
-import { DashboardLayout } from '../dashboard/layouts';
+import { DashboardLayout } from '../dashboard/layout';
 import { DashboardRoutes } from '../dashboard/routes';
 
 export const AppRouter = [
