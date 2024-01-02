@@ -1,5 +1,5 @@
 export const theme = {
-  colors: {
+  color: {
     primary: '#38B6FF',
     grayDark: '#575655',
     grayLight: '#EBEBEB',
@@ -8,8 +8,7 @@ export const theme = {
     success: '#66A15A',
     error: '#CF0B0B',
   },
-  fonts: {
-    poppins: 'Poppins',
-    lato: 'Lato',
+  font: {
+    DMSans: 'DM Sans',
   },
 }
