@@ -1,10 +1,18 @@
 import { Outlet } from 'react-router-dom';
+import { Container, FormContainer, LogoContainer } from './styles';
+
 
 export const AuthLayout = () => {
   return (
     <>
-      <h1>AuthLayout</h1>
-      <Outlet />
+      <Container>
+        <FormContainer>
+          <LogoContainer>
+            <h1>ExpenseFlow Logo</h1>
+          </LogoContainer>
+          <Outlet />
+        </FormContainer>
+      </Container>
     </>
   )
 }
