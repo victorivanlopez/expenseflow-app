@@ -1,5 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import { Container, FormContainer, LogoContainer } from './styles';
+import { FcGoogle } from 'react-icons/fc';
+import {
+  Container,
+  ContainerButton,
+  FormContainer,
+  FormContainerLine,
+  FormHeader
+} from './styles';
 
 
 export const AuthLayout = () => {
@@ -7,9 +14,19 @@ export const AuthLayout = () => {
     <>
       <Container>
         <FormContainer>
-          <LogoContainer>
-            <h1>ExpenseFlow Logo</h1>
-          </LogoContainer>
+          <FormHeader>
+            <h1>¡Bienvenido nuevamente a ExpenseFlow!</h1>
+            <p>Inicia sesión en tu cuenta para continuar</p>
+          </FormHeader>
+          <ContainerButton>
+            <FcGoogle />
+            Continuar con Google
+          </ContainerButton>
+          <FormContainerLine>
+            <span className="line"></span>
+            <span className="text-line">O</span>
+            <span className="line"></span>
+          </FormContainerLine>
           <Outlet />
         </FormContainer>
       </Container>
