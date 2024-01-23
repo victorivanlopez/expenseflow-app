@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-family: ${({ theme }) => theme.font.DMSans};
     font-size: 1.6rem;
-    line-height: 1.5;
+    line-height: 1.2;
   }
 
   h1,
