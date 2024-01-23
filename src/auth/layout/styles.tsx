@@ -14,11 +14,11 @@ export const Container = styled.div`
 export const FormContainer = styled.div`
   display: grid;
   place-items: center;
+  max-width: 60rem;
+  margin: 0 auto;
 `;
 
 export const FormHeader = styled.div`
-  max-width: 60rem;
-  margin: 0 auto;
   text-align: center;
   img {
     width: 25rem;
