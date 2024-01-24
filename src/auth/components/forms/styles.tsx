@@ -16,7 +16,7 @@ export const InputForm = styled.input`
   border-radius: 1rem;
   border: 1px solid #DBDBDB;
   &:focus {
-    outline: 1px solid #fae6da;
+    outline: 1px solid #fdf4ef;
   }
 `;
 
