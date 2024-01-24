@@ -45,6 +45,7 @@ export const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
+    color: #3c0f0e;
   }
 
   ul {

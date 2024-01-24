@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ContainerForm = styled.div`
@@ -54,4 +55,9 @@ export const LineForm = styled.div`
   .text-line {
     margin: 0 1rem;
   }
+`;
+
+export const LinkForm = styled(Link)`
+  margin: 2rem 0;
+  text-decoration: underline;
 `;
