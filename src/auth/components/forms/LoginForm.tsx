@@ -1,13 +1,13 @@
-import { 
+import {
   ButtonForm,
-  ContainerForm, 
-  FieldForm, 
-  InputForm 
+  Form,
+  FieldForm,
+  InputForm
 } from './styles';
 
 export const LoginForm = () => {
   return (
-    <ContainerForm>
+    <Form>
       <FieldForm>
         <InputForm
           type="email"
@@ -26,6 +26,6 @@ export const LoginForm = () => {
       >
         Iniciar sesión
       </ButtonForm>
-    </ContainerForm>
+    </Form>
   )
 }
