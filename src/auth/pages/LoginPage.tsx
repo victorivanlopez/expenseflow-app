@@ -4,7 +4,8 @@ import {
   ButtonContainer,
   ContainerForm,
   HeaderForm,
-  LineForm
+  LineForm,
+  LinkForm
 } from './styles';
 
 export const LoginPage = () => {
@@ -23,7 +24,14 @@ export const LoginPage = () => {
         <span className="text-line">O</span>
         <span className="line"></span>
       </LineForm>
+
       <LoginForm />
+
+      <LinkForm
+        to="/auth/register"
+      >
+        Obtener una nueva cuenta
+      </LinkForm>
     </ContainerForm>
   )
 }
