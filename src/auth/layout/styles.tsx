@@ -35,7 +35,7 @@ export const ContainerButton = styled.button`
   gap: 1rem;
   padding: 1rem 3rem;
   margin: 4rem 0;
-  border-radius: 2rem;
+  border-radius: 1rem;
   background-color: #FFFFFF;
   border: 1px solid #DBDBDB;
   transition: background-color .3s;
