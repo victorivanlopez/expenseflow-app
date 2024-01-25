@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
 import {
   ButtonForm,
   Form,
   FieldForm,
-  InputForm
+  InputForm,
+  ForgotPassForm
 } from './styles';
 
 export const LoginForm = () => {
@@ -20,6 +22,14 @@ export const LoginForm = () => {
           placeholder="Contraseña"
         />
       </FieldForm>
+
+      <ForgotPassForm>
+        <Link
+          to="/auth/forgot-password"
+        >
+          ¿Has olvidado tu contraseña?
+        </Link>
+      </ForgotPassForm>
 
       <ButtonForm
         type="submit"
