@@ -20,6 +20,18 @@ export const InputForm = styled.input`
   }
 `;
 
+export const ForgotPassForm = styled.div`
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: end;
+  a {
+    font-size: 1.5rem;
+    &:hover {
+      color: #3c0f0e;
+    }
+  }
+`;
+
 export const ButtonForm = styled.button`
   width: 100%;
   padding: 1.5rem 2rem;
