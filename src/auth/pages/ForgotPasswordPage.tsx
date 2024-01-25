@@ -6,7 +6,7 @@ export const ForgotPasswordPage = () => {
     <ContainerForm>
       <HeaderForm>
         <h1>¡Recupera el acceso a ExpenseFlow!</h1>
-        <p>Indicanos tu correo para restablecer tu contraseña</p>
+        <p>Indicanos tu correo y te ayudaremos a restablecer tu contraseña</p>
       </HeaderForm>
 
       <ForgotPassForm />

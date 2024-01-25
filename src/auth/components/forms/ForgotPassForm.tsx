@@ -18,7 +18,7 @@ export const ForgotPassForm = () => {
       <ButtonForm
         type="submit"
       >
-        Confirmar
+        Continuar
       </ButtonForm>
     </Form>
   )
