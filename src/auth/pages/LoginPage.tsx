@@ -30,7 +30,7 @@ export const LoginPage = () => {
       <LinkForm
         to="/auth/register"
       >
-        Obtener una nueva cuenta
+        Registrar una nueva cuenta
       </LinkForm>
     </ContainerForm>
   )
