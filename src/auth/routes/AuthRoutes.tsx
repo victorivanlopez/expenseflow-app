@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { LoginPage, RegisterPage } from '../pages';
+import { ForgotPasswordPage, LoginPage, RegisterPage } from '../pages';
 
 
 export const AuthRoutes = [
@@ -14,5 +14,9 @@ export const AuthRoutes = [
   {
     path: 'register',
     element: <RegisterPage />
+  },
+  {
+    path: 'forgot-password',
+    element: <ForgotPasswordPage />
   },
 ]
