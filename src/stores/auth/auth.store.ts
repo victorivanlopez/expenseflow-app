@@ -1,15 +1,27 @@
 import { StateCreator, create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { supabase } from '../../supabase';
 
 export interface AuthState {
   status: AuthStatus;
-  // signInWithGoogle: () => Promise<void>;
+
+  signInWithGoogle: () => Promise<void>;
 }
 
 export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
 
-const storeApi: StateCreator<AuthState> = () => ({
+const storeApi: StateCreator<AuthState> = (set) => ({
   status: 'pending',
+  signInWithGoogle: async () => {
+    try {
+      const { data } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+      console.log(data);
+      set({ status: 'authorized' });
+    } catch (error) {
+      set({ status: 'unauthorized' });
+      throw new Error('Ocurrió un error.');
+    }
+  }
 });
 
 export const useAuthStore = create<AuthState>()(
