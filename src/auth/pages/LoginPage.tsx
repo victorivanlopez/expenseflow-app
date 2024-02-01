@@ -7,15 +7,20 @@ import {
   LineForm,
   LinkForm
 } from './styles';
+import { useAuthStore } from '../../stores';
 
 export const LoginPage = () => {
+  const signInWithGoogle = useAuthStore((state) => state.signInWithGoogle);
+
   return (
     <ContainerForm>
       <HeaderForm>
         <h1>¡Bienvenido nuevamente a ExpenseFlow!</h1>
         <p>Inicia sesión en tu cuenta para continuar</p>
       </HeaderForm>
-      <ButtonContainer>
+      <ButtonContainer
+        onClick={signInWithGoogle}
+      >
         <FcGoogle />
         Continuar con Google
       </ButtonContainer>
