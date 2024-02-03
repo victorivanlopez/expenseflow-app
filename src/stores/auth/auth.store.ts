@@ -3,22 +3,21 @@ import { devtools, persist } from 'zustand/middleware';
 import { supabase } from '../../supabase';
 
 export interface AuthState {
-  status: AuthStatus;
+  isAuth: boolean,
   signInWithGoogle: () => Promise<void>;
 }
 
-export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
 
 const storeApi: StateCreator<AuthState> = (set) => ({
-  status: 'pending',
+  isAuth: false,
   
   signInWithGoogle: async () => {
     try {
       await supabase.auth.signInWithOAuth({ provider: 'google' });
-      set({ status: 'authorized' });
+      set({ isAuth: true });
     } catch (error) {
-      set({ status: 'unauthorized' });
-      throw new Error('Ocurrió un error.');
+      set({ isAuth: false });
+      throw new Error('Ocurrió un error en la autenticación.');
     }
   }
 });
