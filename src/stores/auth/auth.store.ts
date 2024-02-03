@@ -4,7 +4,6 @@ import { supabase } from '../../supabase';
 
 export interface AuthState {
   status: AuthStatus;
-
   signInWithGoogle: () => Promise<void>;
 }
 
@@ -12,10 +11,10 @@ export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
 
 const storeApi: StateCreator<AuthState> = (set) => ({
   status: 'pending',
+  
   signInWithGoogle: async () => {
     try {
-      const { data } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-      console.log(data);
+      await supabase.auth.signInWithOAuth({ provider: 'google' });
       set({ status: 'authorized' });
     } catch (error) {
       set({ status: 'unauthorized' });
