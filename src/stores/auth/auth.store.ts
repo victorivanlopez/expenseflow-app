@@ -1,5 +1,5 @@
 import { StateCreator, create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
 import { supabase } from '../../supabase';
 
 export interface AuthState {
@@ -34,9 +34,6 @@ const storeApi: StateCreator<AuthState> = (set) => ({
 
 export const useAuthStore = create<AuthState>()(
   devtools(
-    persist(
-      storeApi,
-      { name: 'user-storage' }
-    )
+    storeApi,
   )
 );
