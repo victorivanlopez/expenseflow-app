@@ -1,10 +1,13 @@
 import { StateCreator, create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { supabase } from '../../supabase';
+import type { User } from '../../interfaces';
 
 export interface AuthState {
   isAuth: boolean;
+  user?: User;
 
+  setUser: (user: User) => void;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
 }
@@ -12,6 +15,9 @@ export interface AuthState {
 
 const storeApi: StateCreator<AuthState> = (set) => ({
   isAuth: false,
+  user: undefined,
+
+  setUser: (user: User) => set({ user }),
 
   signInWithGoogle: async () => {
     try {
