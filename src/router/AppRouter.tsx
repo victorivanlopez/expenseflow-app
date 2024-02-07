@@ -1,9 +1,9 @@
-import { PrivateRoute } from './PrivateRoute';
-import { PublicRoute } from './PublicRoute';
-import { AuthLayout } from '../auth/layout';
-import { AuthRoutes } from '../auth/routes';
 import { DashboardLayout } from '../dashboard/layout';
+import { AuthLayout } from '../auth/layout';
+import { PrivateRoute } from './PrivateRoute';
 import { DashboardRoutes } from '../dashboard/routes';
+import { AuthRoutes } from '../auth/routes';
+import { PublicRoute } from './PublicRoute';
 
 export const AppRouter = [
   {
