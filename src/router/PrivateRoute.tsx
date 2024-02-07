@@ -1,30 +1,16 @@
-import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Session } from '@supabase/supabase-js';
-import { supabase } from '../supabase';
+import { useAuth } from '../hooks';
 
 interface Props {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
-export const PrivateRoute: React.FC<Props> = ({ children }) => {
-  const [session, setSession] = useState<Session | null>(null);
+export const PrivateRoute = ({ children }: Props) => {
+  const { session, isLoading } = useAuth();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    })
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
+  if (isLoading) return;
 
   return (session)
     ? children
-    : <Navigate to="/auth/login" />
+    : <Navigate replace to="auth/login" />
 }
