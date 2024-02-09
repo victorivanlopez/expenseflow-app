@@ -1,16 +1,16 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks';
+import { useAuthStore } from '../stores';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const PublicRoute = ({ children }: Props) => {
-  const { session, isLoading } = useAuth();
+  const statusSession = useAuthStore(state => state.statusSession);
 
-  if (isLoading) return;
+  if (statusSession === 'pending') return;
 
-  return (session)
+  return (statusSession === 'authorized')
     ? <Navigate replace to="/" />
     : children
 }
