@@ -10,6 +10,7 @@ export interface AuthState {
 
   setSession: (session: Session | null) => void;
   signInWithGoogle: () => Promise<void>;
+  signUpNewUser: (email: string, password: string, fullName: string) => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -39,6 +40,24 @@ const storeApi: StateCreator<AuthState> = (set) => ({
       await supabase.auth.signInWithOAuth({ provider: 'google' });
     } catch (error) {
       throw new Error('Ocurrió un error en la autenticación con Google.');
+    }
+  },
+  signUpNewUser: async (email: string, password: string, fullName: string) => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+            email,
+          }
+        }
+      });
+      if (error) throw new Error('Ocurrió un error al registrar usuario.');
+      console.log(data)
+    } catch (error) {
+      throw new Error('Ocurrió un error al registrar usuario.');
     }
   },
   signOut: async () => {
