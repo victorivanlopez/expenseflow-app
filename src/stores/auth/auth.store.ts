@@ -16,7 +16,7 @@ export interface AuthState {
 
 export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
 
-const storeApi: StateCreator<AuthState> = (set) => ({
+const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) => ({
   statusSession: 'pending',
   user: undefined,
 
