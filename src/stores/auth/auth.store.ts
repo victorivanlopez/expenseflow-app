@@ -26,7 +26,7 @@ const storeApi: StateCreator<AuthState> = (set) => ({
         statusSession: 'authorized',
         user: {
           id: session.user.id,
-          email: session.user.user_metadata.email,
+          email: session.user.email,
           fullName: session.user.user_metadata.full_name,
         }
       })
@@ -37,26 +37,27 @@ const storeApi: StateCreator<AuthState> = (set) => ({
 
   signInWithGoogle: async () => {
     try {
-      await supabase.auth.signInWithOAuth({ provider: 'google' });
+      const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+      if (error) throw new Error(error.message);
     } catch (error) {
+      set({ statusSession: 'unauthorized' });
       throw new Error('Ocurrió un error en la autenticación con Google.');
     }
   },
   signUpNewUser: async (email: string, password: string, fullName: string) => {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
-            full_name: fullName,
-            email,
+            full_name: fullName
           }
         }
       });
-      if (error) throw new Error('Ocurrió un error al registrar usuario.');
-      console.log(data)
+      if (error) throw new Error(error.message);
     } catch (error) {
+      set({ statusSession: 'unauthorized' });
       throw new Error('Ocurrió un error al registrar usuario.');
     }
   },
