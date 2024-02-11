@@ -29,9 +29,9 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
           email: session.user?.email,
           fullName: session.user.user_metadata.full_name,
         }
-      })
+      }, false, 'setSession');
     } else {
-      set({ statusSession: 'unauthorized' })
+      set({ statusSession: 'unauthorized' }, false, 'setSession');
     }
   },
 
@@ -64,7 +64,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
   signOut: async () => {
     try {
       await supabase.auth.signOut();
-      set({ statusSession: 'unauthorized', user: undefined });
+      set({ statusSession: 'unauthorized', user: undefined }, false, 'signOut');
     } catch (error) {
       throw new Error('Ocurrió un error durante el cierre de sesión.');
     }
