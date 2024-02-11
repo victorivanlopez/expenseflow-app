@@ -26,7 +26,7 @@ const storeApi: StateCreator<AuthState> = (set) => ({
         statusSession: 'authorized',
         user: {
           id: session.user.id,
-          email: session.user.email,
+          email: session.user?.email,
           fullName: session.user.user_metadata.full_name,
         }
       })
