@@ -1,12 +1,14 @@
 import { ChangeEvent, useState } from 'react';
 import type { NewUserInputForm } from '../interfaces';
 
-export const useForm = (initialForm: NewUserInputForm) => {
+type InputForm = NewUserInputForm;
+
+export const useForm = (initialForm: InputForm) => {
 
   const [formState, setFormState] = useState(initialForm);
 
   const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = target as HTMLInputElement;
+    const { name, value } = target;
     setFormState({
       ...formState,
       [name]: value
