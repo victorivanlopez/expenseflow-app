@@ -1,8 +1,8 @@
 import { StateCreator, create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { supabase } from '../../supabase';
+import { AuthResponse, Session } from '@supabase/supabase-js';
 import type { User } from '../../interfaces';
-import { Session } from '@supabase/supabase-js';
 
 export interface AuthState {
   statusSession: AuthStatus;
@@ -10,7 +10,7 @@ export interface AuthState {
 
   setSession: (session: Session | null) => void;
   signInWithGoogle: () => Promise<void>;
-  signUpNewUser: (email: string, password: string, fullName: string) => Promise<void>;
+  signUpNewUser: (email: string, password: string, fullName: string) => Promise<AuthResponse>;
   signOut: () => Promise<void>;
 }
 
@@ -46,7 +46,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
   },
   signUpNewUser: async (email: string, password: string, fullName: string) => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const response = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -55,7 +55,8 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
           }
         }
       });
-      if (error) throw new Error(error.message);
+      if (response.error) throw new Error(response.error.message);
+      return response;
     } catch (error) {
       set({ statusSession: 'unauthorized' });
       throw new Error('Ocurrió un error al registrar usuario.');
