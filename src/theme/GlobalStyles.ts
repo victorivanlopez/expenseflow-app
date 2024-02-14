@@ -79,7 +79,17 @@ export const GlobalStyles = createGlobalStyle`
     margin-bottom: 5rem;
   }
 
-  .error {
-    color: ${({ theme }) => theme.color.error};
+  .error-alert {
+    background-color: #fee2e2;
+    border-top: 1px solid #ef4444;
+    border-bottom: 1px solid #ef4444;
+    color: #b91c1c;
+  }
+  
+  .success-alert {
+    background-color: #bbf7d0;
+    border-top: 1px solid #22c55e;
+    border-bottom: 1px solid #22c55e;
+    color: #15803d;
   }
 `;
