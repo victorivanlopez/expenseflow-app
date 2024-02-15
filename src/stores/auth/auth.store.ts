@@ -1,8 +1,8 @@
 import { StateCreator, create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { supabase } from '../../supabase';
-import { AuthResponse, Session } from '@supabase/supabase-js';
-import type { User } from '../../interfaces';
+import { Session } from '@supabase/supabase-js';
+import type { AlertResponse, User } from '../../interfaces';
 
 export interface AuthState {
   statusSession: AuthStatus;
@@ -10,7 +10,7 @@ export interface AuthState {
 
   setSession: (session: Session | null) => void;
   signInWithGoogle: () => Promise<void>;
-  signUpNewUser: (email: string, password: string, fullName: string) => Promise<AuthResponse>;
+  signUpNewUser: (email: string, password: string, fullName: string) => Promise<AlertResponse>;
   signOut: () => Promise<void>;
 }
 
@@ -46,7 +46,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
   },
   signUpNewUser: async (email: string, password: string, fullName: string) => {
     try {
-      const response = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -55,11 +55,17 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
           }
         }
       });
-      if (response.error) throw new Error(response.error.message);
-      return response;
+
+      if (error) {
+        return { message: 'Ocurrió un error en la autenticación con Google.', type: 'error' };
+      }
+      if (data.user?.identities?.length === 0) {
+        return { message: 'El correo electrónico ya está registrado.', type: 'error' };
+      }
+      return { message: 'Registro realizado con éxito. Por favor, revisa tu email para confirmar la cuenta.', type: 'success' };
     } catch (error) {
       set({ statusSession: 'unauthorized' });
-      throw new Error('Ocurrió un error al registrar usuario.');
+      return { message: 'Ocurrió un error en la autenticación con Google.', type: 'error' };
     }
   },
   signOut: async () => {
