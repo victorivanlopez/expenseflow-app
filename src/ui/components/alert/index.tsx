@@ -1,7 +1,8 @@
 import { ContainerAlert } from './styles';
+import type { AlertResponse } from '../../../interfaces';
 
 interface Props {
-  alert: { message: string, type?: 'error' | 'success' };
+  alert: AlertResponse;
 }
 
 export const Alert = ({ alert }: Props) => {
