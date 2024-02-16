@@ -1,7 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import type { NewUserInputForm } from '../interfaces';
-
-type InputForm = NewUserInputForm;
+import type { InputForm } from '../interfaces';
 
 export const useForm = (initialForm: InputForm) => {
 
