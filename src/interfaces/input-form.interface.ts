@@ -1,6 +1,6 @@
 
-export interface NewUserInputForm {
+export interface InputForm {
   email: string;
   password: string;
-  fullName: string;
+  fullName?: string;
 }
