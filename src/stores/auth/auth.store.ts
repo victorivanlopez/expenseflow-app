@@ -10,7 +10,8 @@ export interface AuthState {
 
   setSession: (session: Session | null) => void;
   signInWithGoogle: () => Promise<void>;
-  signUpNewUser: (email: string, password: string, fullName: string) => Promise<AlertResponse>;
+  signInWithEmail: (email: string, password: string) => Promise<AlertResponse | void>;
+  signUpNewUser: (email: string, password: string, fullName?: string) => Promise<AlertResponse>;
   signOut: () => Promise<void>;
 }
 
@@ -44,7 +45,24 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
       throw new Error('Ocurrió un error en la autenticación con Google.');
     }
   },
-  signUpNewUser: async (email: string, password: string, fullName: string) => {
+
+  signInWithEmail: async (email: string, password: string) => {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        return { message: 'Ocurrió un error al iniciar sesión.', type: 'error' };
+      }
+    } catch (error) {
+      set({ statusSession: 'unauthorized' });
+      return { message: 'Ocurrió un error al iniciar sesión.', type: 'error' };
+    }
+  },
+
+  signUpNewUser: async (email: string, password: string, fullName?: string) => {
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
