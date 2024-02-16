@@ -9,10 +9,10 @@ export interface AuthState {
   user?: User;
 
   setSession: (session: Session | null) => void;
-  signInWithGoogle: () => Promise<void>;
+  signInWithGoogle: () => Promise<AlertResponse | void>;
   signInWithEmail: (email: string, password: string) => Promise<AlertResponse | void>;
   signUpNewUser: (email: string, password: string, fullName?: string) => Promise<AlertResponse>;
-  signOut: () => Promise<void>;
+  signOut: () => Promise<AlertResponse | void>;
 }
 
 export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
@@ -39,10 +39,12 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
   signInWithGoogle: async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-      if (error) throw new Error(error.message);
+      if (error) {
+        return { message: error.message, type: 'error' };
+      }
     } catch (error) {
       set({ statusSession: 'unauthorized' });
-      throw new Error('Ocurrió un error en la autenticación con Google.');
+      return { message: 'Ocurrió un error en la autenticación con Google.', type: 'error' };
     }
   },
 
@@ -83,7 +85,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
       return { message: 'Registro realizado con éxito. Por favor, revisa tu email para confirmar la cuenta.', type: 'success' };
     } catch (error) {
       set({ statusSession: 'unauthorized' });
-      return { message: 'Ocurrió un error en la autenticación con Google.', type: 'error' };
+      return { message: 'Error al registrarte.', type: 'error' };
     }
   },
   signOut: async () => {
@@ -91,7 +93,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
       await supabase.auth.signOut();
       set({ statusSession: 'unauthorized', user: undefined }, false, 'signOut');
     } catch (error) {
-      throw new Error('Ocurrió un error durante el cierre de sesión.');
+      return { message: 'Ocurrió un error durante el cierre de sesión.', type: 'error' };
     }
   }
 });
