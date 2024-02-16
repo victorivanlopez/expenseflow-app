@@ -75,7 +75,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
       });
 
       if (error) {
-        return { message: 'Ocurrió un error en la autenticación con Google.', type: 'error' };
+        return { message: error.message, type: 'error' };
       }
       if (data.user?.identities?.length === 0) {
         return { message: 'El correo electrónico ya está registrado.', type: 'error' };
