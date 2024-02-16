@@ -7,12 +7,14 @@ import type { AlertResponse, User } from '../../interfaces';
 export interface AuthState {
   statusSession: AuthStatus;
   user?: User;
+  isChangingPass: boolean;
 
   setSession: (session: Session | null) => void;
   signInWithGoogle: () => Promise<AlertResponse | void>;
   signInWithEmail: (email: string, password: string) => Promise<AlertResponse | void>;
   signUpNewUser: (email: string, password: string, fullName?: string) => Promise<AlertResponse>;
   signOut: () => Promise<AlertResponse | void>;
+  setIsChangingPass: (newState: boolean) => void;
 }
 
 export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
@@ -20,6 +22,7 @@ export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
 const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) => ({
   statusSession: 'pending',
   user: undefined,
+  isChangingPass: false,
 
   setSession: (session: Session | null) => {
     if (session) {
@@ -95,7 +98,8 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
     } catch (error) {
       return { message: 'Ocurrió un error durante el cierre de sesión.', type: 'error' };
     }
-  }
+  },
+  setIsChangingPass: (newState: boolean) => set({ isChangingPass: newState }),
 });
 
 export const useAuthStore = create<AuthState>()(
