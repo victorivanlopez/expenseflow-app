@@ -54,7 +54,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
       });
 
       if (error) {
-        return { message: 'Ocurrió un error al iniciar sesión.', type: 'error' };
+        return { message: error.message, type: 'error' };
       }
     } catch (error) {
       set({ statusSession: 'unauthorized' });
