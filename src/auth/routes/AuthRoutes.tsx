@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { ForgotPasswordPage, LoginPage, RegisterPage } from '../pages';
+import { ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage } from '../pages';
 
 
 export const AuthRoutes = [
@@ -19,4 +19,8 @@ export const AuthRoutes = [
     path: 'forgot-password',
     element: <ForgotPasswordPage />
   },
+  {
+    path: 'reset-password',
+    element: <ResetPasswordPage />
+  }
 ]
