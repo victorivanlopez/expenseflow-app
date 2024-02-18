@@ -7,10 +7,11 @@ interface Props {
 
 export const PublicRoute = ({ children }: Props) => {
   const statusSession = useAuthStore(state => state.statusSession);
+  const isChangingPass = useAuthStore(state => state.isChangingPass);
 
   if (statusSession === 'pending') return;
 
-  return (statusSession === 'authorized')
+  return (statusSession === 'authorized' && !isChangingPass)
     ? <Navigate replace to="/" />
     : children
 }
