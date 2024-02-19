@@ -15,12 +15,11 @@ export const App = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log({ _event, session })
-      if (_event === 'INITIAL_SESSION') {
-        setSession(session);
-      } else if (_event === 'PASSWORD_RECOVERY') {
+      if (_event === 'PASSWORD_RECOVERY') {
         setSession(null);
-        setIsChangingPass(true);
+        return setIsChangingPass(true);
+      } else {
+        setSession(session)
       }
     });
 
