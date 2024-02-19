@@ -1,20 +1,61 @@
-import { ButtonForm, FieldForm, Form, InputForm } from './styles';
+import { FormEvent, useState } from 'react';
+import {
+  ButtonForm,
+  FieldForm,
+  Form,
+  InputForm
+} from './styles';
+import { Alert } from '../../../ui/components';
+import type { AlertResponse } from '../../../interfaces';
+import { useAuthStore } from '../../../stores';
 
 export const ResetPasswordForm = () => {
-  return (
-    <Form>
-      <FieldForm>
-        <InputForm
-          type="password"
-          placeholder="Nueva contraseña"
-        />
-      </FieldForm>
 
-      <ButtonForm
-        type="submit"
-      >
-        Restablecer contraseña
-      </ButtonForm>
-    </Form>
+  const resetPassword = useAuthStore(state => state.resetPassword);
+
+  const [password, setPassword] = useState('');
+  const [alert, setAlert] = useState<AlertResponse>({
+    message: '',
+  });
+
+  const onSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (password === '') {
+      return setAlert({
+        message: 'El correo es obligatorio.',
+        type: 'error'
+      });
+    }
+
+    const response = await resetPassword(password);
+
+    if (response.type === 'error') {
+      return setAlert(response);
+    }
+
+    setAlert(response);
+  }
+  return (
+    <>
+      {alert.message && <Alert alert={alert} />}
+
+      <Form onSubmit={onSubmitForm}>
+        <FieldForm>
+          <InputForm
+            type="password"
+            placeholder="Nueva contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FieldForm>
+
+        <ButtonForm
+          type="submit"
+        >
+          Restablecer contraseña
+        </ButtonForm>
+      </Form>
+    </>
   )
 }
