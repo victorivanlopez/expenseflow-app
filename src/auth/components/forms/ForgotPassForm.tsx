@@ -35,6 +35,7 @@ export const ForgotPassForm = () => {
     }
 
     setAlert(response);
+    setEmail('');
   }
 
   return (
