@@ -16,6 +16,7 @@ export interface AuthState {
   signOut: () => Promise<AlertResponse | void>;
   setIsChangingPass: (newState: boolean) => void;
   sendEmailPasswordReset: (email: string) => Promise<AlertResponse>;
+  resetPassword: (password: string) => Promise<AlertResponse>;
 }
 
 export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
@@ -115,7 +116,21 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
     } catch (error) {
       return { message: 'Error al enviar el correo electrónico.', type: 'error' };
     }
-  }
+  },
+
+  resetPassword: async (password: string) => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password
+      });
+      if (error) {
+        return { message: error.message, type: 'error' };
+      }
+      return { message: 'Contraseña restablecida con éxito.', type: 'success' };
+    } catch (error) {
+      return { message: 'Ha ocurrido un error al restablecer la contraseña.', type: 'error' };
+    }
+  },
 });
 
 export const useAuthStore = create<AuthState>()(
