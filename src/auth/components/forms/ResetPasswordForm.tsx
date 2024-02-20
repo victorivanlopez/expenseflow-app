@@ -12,6 +12,7 @@ import { useAuthStore } from '../../../stores';
 export const ResetPasswordForm = () => {
 
   const resetPassword = useAuthStore(state => state.resetPassword);
+  const changedPassword = useAuthStore(state => state.changedPassword);
 
   const [password, setPassword] = useState('');
   const [alert, setAlert] = useState<AlertResponse>({
@@ -47,22 +48,26 @@ export const ResetPasswordForm = () => {
     <>
       {alert.message && <Alert alert={alert} />}
 
-      <Form onSubmit={onSubmitForm}>
-        <FieldForm>
-          <InputForm
-            type="password"
-            placeholder="Nueva contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FieldForm>
+      {
+        !changedPassword && (
+          <Form onSubmit={onSubmitForm}>
+            <FieldForm>
+              <InputForm
+                type="password"
+                placeholder="Nueva contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FieldForm>
 
-        <ButtonForm
-          type="submit"
-        >
-          Restablecer contraseña
-        </ButtonForm>
-      </Form>
+            <ButtonForm
+              type="submit"
+            >
+              Restablecer contraseña
+            </ButtonForm>
+          </Form>
+        )
+      }
     </>
   )
 }
