@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '../../stores';
-import { Alert } from '../../ui/components';
-import { ResetPasswordForm } from '../components/forms/ResetPasswordForm';
+import { Alert, LinkButton } from '../../ui/components';
+import { ResetPasswordForm } from '../components';
 import { ContainerForm, HeaderForm } from './styles';
 import { AlertResponse } from '../../interfaces';
 
 export const ResetPasswordPage = () => {
   const isChangingPass = useAuthStore(state => state.isChangingPass);
+  const changedPassword = useAuthStore(state => state.changedPassword);
   const [alert, setAlert] = useState<AlertResponse>({
     message: '',
   });
@@ -28,9 +29,16 @@ export const ResetPasswordPage = () => {
         <p>Indicanos tu nueva contraseña de acceso</p>
       </HeaderForm>
 
+      {!isChangingPass && <Alert alert={alert} />}
+
       {isChangingPass && <ResetPasswordForm />}
 
-      {!isChangingPass && <Alert alert={alert} />}
+      {changedPassword && (
+        <LinkButton
+          navigateTo='/'
+          textButton='Ir al dashboard'
+        />
+      )}
 
     </ContainerForm>
   )
