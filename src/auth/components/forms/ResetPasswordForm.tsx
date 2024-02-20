@@ -23,7 +23,14 @@ export const ResetPasswordForm = () => {
 
     if (password === '') {
       return setAlert({
-        message: 'El correo es obligatorio.',
+        message: 'La contraseña es obligatoria',
+        type: 'error'
+      });
+    }
+
+    if (password.length < 6) {
+      return setAlert({
+        message: 'La contraseña debe tener al menos 6 caracteres',
         type: 'error'
       });
     }
