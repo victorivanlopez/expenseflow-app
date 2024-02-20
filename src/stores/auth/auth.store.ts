@@ -8,6 +8,7 @@ export interface AuthState {
   statusSession: AuthStatus;
   user?: User;
   isChangingPass: boolean;
+  changedPassword: boolean;
 
   setSession: (session: Session | null) => void;
   signInWithGoogle: () => Promise<AlertResponse | void>;
@@ -25,6 +26,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
   statusSession: 'pending',
   user: undefined,
   isChangingPass: false,
+  changedPassword: false,
 
   setSession: (session: Session | null) => {
     if (session) {
@@ -126,6 +128,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
       if (error) {
         return { message: error.message, type: 'error' };
       }
+      set({ changedPassword: true })
       return { message: 'Contraseña restablecida con éxito.', type: 'success' };
     } catch (error) {
       return { message: 'Ha ocurrido un error al restablecer la contraseña.', type: 'error' };
