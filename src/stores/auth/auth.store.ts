@@ -98,7 +98,7 @@ const storeApi: StateCreator<AuthState, [["zustand/devtools", never]]> = (set) =
   signOut: async () => {
     try {
       await supabase.auth.signOut();
-      set({ statusSession: 'unauthorized', user: undefined }, false, 'signOut');
+      set({ statusSession: 'unauthorized', user: undefined, isChangingPass: false, changedPassword: false }, false, 'signOut');
     } catch (error) {
       return { message: 'Ocurrió un error durante el cierre de sesión.', type: 'error' };
     }
