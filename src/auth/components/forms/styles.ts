@@ -14,9 +14,9 @@ export const InputForm = styled.input`
   width: 100%;
   padding: 1.5rem;
   border-radius: 1rem;
-  border: 1px solid #DBDBDB;
+  border: 1px solid ${({ theme }) => theme.color.gray200};
   &:focus {
-    outline: 1px solid #fdf4ef;
+    outline: 1px solid ${({ theme }) => theme.color.primary100};
   }
 `;
 
@@ -27,7 +27,7 @@ export const ForgotPassForm = styled.div`
   a {
     font-size: 1.5rem;
     &:hover {
-      color: #3c0f0e;
+      color: ${({ theme }) => theme.color.primary950};
     }
   }
 `;
@@ -36,11 +36,11 @@ export const ButtonForm = styled.button`
   width: 100%;
   padding: 1.5rem 2rem;
   border-radius: 1rem;
-  background-color: #e05935;
-  color: #FFFFFF;
+  background-color: ${({ theme }) => theme.color.primary500};
+  color: ${({ theme }) => theme.color.white};
   border: none;
   transition: background-color .3s;
   &:hover {
-    background-color: #d13e25;
+    background-color: ${({ theme }) => theme.color.primary600};
   }
 `;

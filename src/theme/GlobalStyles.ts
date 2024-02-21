@@ -80,16 +80,16 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .error-alert {
-    background-color: #fee2e2;
-    border-top: 1px solid #ef4444;
-    border-bottom: 1px solid #ef4444;
-    color: #b91c1c;
+    background-color: ${({ theme }) => theme.color.red100};
+    border-top: 1px solid ${({ theme }) => theme.color.red400};
+    border-bottom: 1px solid ${({ theme }) => theme.color.red400};
+    color: ${({ theme }) => theme.color.red500};
   }
   
   .success-alert {
-    background-color: #bbf7d0;
-    border-top: 1px solid #22c55e;
-    border-bottom: 1px solid #22c55e;
-    color: #15803d;
+    background-color: ${({ theme }) => theme.color.green100};
+    border-top: 1px solid ${({ theme }) => theme.color.green400};
+    border-bottom: 1px solid ${({ theme }) => theme.color.green400};
+    color: ${({ theme }) => theme.color.green500};
   }
 `;

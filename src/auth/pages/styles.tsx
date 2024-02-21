@@ -27,11 +27,11 @@ export const ButtonContainer = styled.button`
   padding: 1rem 3rem;
   margin-bottom: 4rem;
   border-radius: 1rem;
-  background-color: #FFFFFF;
-  border: 1px solid #DBDBDB;
+  background-color: ${({ theme }) => theme.color.white};
+  border: 1px solid ${({ theme }) => theme.color.gray200};
   transition: background-color .3s;
   &:hover {
-    background-color: #f9f9f9;
+    background-color: ${({ theme }) => theme.color.gray200};
   }
   svg {
     width: 2.5rem;
@@ -50,7 +50,7 @@ export const LineForm = styled.div`
   }
   .line {
     width: 100%;
-    border: 1px solid #DBDBDB;
+    border: 1px solid ${({ theme }) => theme.color.gray200};
   }
   .text-line {
     margin: 0 1rem;
