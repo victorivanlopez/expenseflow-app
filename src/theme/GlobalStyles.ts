@@ -80,6 +80,18 @@ export const GlobalStyles = createGlobalStyle`
     margin-bottom: 5rem;
   }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   .error-alert {
     background-color: ${({ theme }) => theme.color.red100};
     border-top: 1px solid ${({ theme }) => theme.color.red400};
