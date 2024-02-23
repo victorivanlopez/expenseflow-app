@@ -30,7 +30,7 @@ export const theme = {
     green400: '#4ade80',
     green500: '#16a34a',
     white: '#ffffff',
-    black: '#545454',
+    black: '#333333',
   },
   font: {
     DMSans: 'DM Sans',
