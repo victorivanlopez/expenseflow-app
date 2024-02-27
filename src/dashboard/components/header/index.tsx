@@ -6,14 +6,13 @@ import {
   LogoButton,
   LogoContainer,
   LogoImage,
-  MenuItem,
   MenuOptionsUser,
   Navbar,
   UserButton,
   UserInfo,
   UserMenuContainer,
-  UserMenuFlex,
 } from './styles';
+import { useAuthStore } from '../../../stores';
 
 interface Props {
   showUserMenu: boolean;
@@ -21,6 +20,8 @@ interface Props {
 }
 
 export const Header = ({ showUserMenu, setShowUserMenu }: Props) => {
+  const user = useAuthStore(state => state.user);
+
   return (
     <HeaderContainer>
       <Navbar>
@@ -40,35 +41,33 @@ export const Header = ({ showUserMenu, setShowUserMenu }: Props) => {
           </LogoContainer>
 
           <UserMenuContainer>
-            <UserMenuFlex>
-              <UserButton
-                type='button'
-                onClick={() => setShowUserMenu(!showUserMenu)}
-              >
-                <span className="sr-only">Abrir menú de usuario</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
-                </svg>
+            <UserButton
+              type='button'
+              onClick={() => setShowUserMenu(!showUserMenu)}
+            >
+              <span className="sr-only">Abrir menú de usuario</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+              </svg>
 
-              </UserButton>
-              <DropdownMenu show={showUserMenu.toString()}>
-                <UserInfo>
-                  <p>Víctor Iván López</p>
-                  <p>victor_ivan22@hotmail.com</p>
-                </UserInfo>
-                <MenuOptionsUser>
-                  <li>
-                    <MenuItem href="#">Perfil</MenuItem>
-                  </li>
-                  <li>
-                    <MenuItem href="#">Ajustes</MenuItem>
-                  </li>
-                  <li>
-                    <MenuItem href="#">Cerrar sesión</MenuItem>
-                  </li>
-                </MenuOptionsUser>
-              </DropdownMenu>
-            </UserMenuFlex>
+            </UserButton>
+            <DropdownMenu show={showUserMenu.toString()}>
+              <UserInfo>
+                <p>{user?.fullName}</p>
+                <p>{user?.email}</p>
+              </UserInfo>
+              <MenuOptionsUser>
+                <li>
+                  <a href="#">Perfil</a>
+                </li>
+                <li>
+                  <a href="#">Ajustes</a>
+                </li>
+                <li>
+                  <a href="#">Cerrar sesión</a>
+                </li>
+              </MenuOptionsUser>
+            </DropdownMenu>
           </UserMenuContainer>
         </FlexContainer>
       </Navbar>
