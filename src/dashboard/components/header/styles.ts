@@ -8,12 +8,14 @@ export const HeaderContainer = styled.header`
     border-bottom: 1px solid #E5E7EB;
     background-color: #ffffff;
     padding: 1rem 2rem;
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       padding: 2rem 4rem;
   }
 `;
 
 export const Navbar = styled.nav`
+  max-width: 120rem;
+  margin: 0 auto;
   position: relative;
 `;
 
@@ -41,11 +43,8 @@ export const LogoButton = styled.button`
 `;
 
 export const LogoImage = styled.img`
-  width: 10rem;
+  width: 14rem;
   cursor: pointer;
-  @media (min-width: 768px) {
-    width: 14rem;
-  }
 `;
 
 export const UserMenuContainer = styled.div`
@@ -71,8 +70,12 @@ export const DropdownMenu = styled.div<{ show: string }>`
   z-index: 1;
   margin-top: 1rem;
   padding: 2rem;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   font-size: 1.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  @media (min-width: 768px) {
+    padding: 2rem 4rem;
+    font-size: 1.6rem;
+  }
   ${({ show }) => show === 'true' && css`
     display: block;
   `}
