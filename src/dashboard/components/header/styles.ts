@@ -1,22 +1,17 @@
 import styled, { css } from 'styled-components';
 
 export const HeaderContainer = styled.header`
-    position: fixed; 
-    top: 0; 
-    z-index: 1;
     width: 100%;
     border-bottom: 1px solid #E5E7EB;
     background-color: #ffffff;
-    padding: 1rem 2rem;
-    @media (min-width: 768px) {
-      padding: 2rem 4rem;
-  }
 `;
 
 export const Navbar = styled.nav`
-  max-width: 120rem;
-  margin: 0 auto;
   position: relative;
+  padding: 1rem;
+    @media (min-width: 768px) {
+      padding: 2rem;
+  }
 `;
 
 export const FlexContainer = styled.div`
@@ -45,18 +40,17 @@ export const LogoButton = styled.button`
 export const LogoImage = styled.img`
   width: 14rem;
   cursor: pointer;
+  @media (min-width: 768px) {
+    width: 16rem;
+  }
 `;
 
 export const UserMenuContainer = styled.div`
   
 `;
 
-export const UserMenuFlex = styled.div`
-
-`;
-
 export const UserButton = styled.button`
-  width: 4rem;
+  width: 3.5rem;
   background-color: ${({ theme }) => theme.color.white};
   border: none;
   color: ${({ theme }) => theme.color.black};
@@ -73,7 +67,7 @@ export const DropdownMenu = styled.div<{ show: string }>`
   font-size: 1.5rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   @media (min-width: 768px) {
-    padding: 2rem 4rem;
+    padding: 2rem 3rem;
     font-size: 1.6rem;
   }
   ${({ show }) => show === 'true' && css`
@@ -88,11 +82,17 @@ export const UserInfo = styled.div`
 `;
 
 export const MenuOptionsUser = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-export const MenuItem = styled.a`
-  
+  li {
+    display: flex;
+    flex-direction: column;
+    padding: .7rem;
+    border-radius: .5rem;
+    transition: background-color .3s color .3s;
+    &:hover {
+      background-color: ${({ theme }) => theme.color.primary50};
+      a {
+        color: ${({ theme }) => theme.color.primary500};
+      }
+    }
+  }
 `;
