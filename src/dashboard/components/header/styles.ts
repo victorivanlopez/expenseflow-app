@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 
 export const HeaderContainer = styled.header`
     width: 100%;
-    border-bottom: 1px solid #E5E7EB;
-    background-color: #ffffff;
+    border-bottom: 1px solid ${({theme}) => theme.color.gray100};
+    background-color: ${({theme}) => theme.color.white};
 `;
 
 export const Navbar = styled.nav`
@@ -85,9 +85,12 @@ export const MenuOptionsUser = styled.ul`
   li {
     display: flex;
     flex-direction: column;
-    padding: .7rem;
+    padding: .6rem;
     border-radius: .5rem;
     transition: background-color .3s color .3s;
+    a {
+      font-weight: 500;
+    }
     &:hover {
       background-color: ${({ theme }) => theme.color.primary50};
       a {
