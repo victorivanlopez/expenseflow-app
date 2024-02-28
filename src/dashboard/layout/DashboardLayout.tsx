@@ -1,26 +1,32 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from '../components';
-import { MainContainer } from './styles';
+import { Header, Sidebar } from '../components';
 import { useState } from 'react';
+import { MainContainer, MainContent, MainSection } from './styles';
 
 export const DashboardLayout = () => {
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 
   const onClickContainer = () => {
-    if(showUserMenu) {
+    if (showUserMenu) {
       setShowUserMenu(!showUserMenu);
     }
   }
 
   return (
-    <MainContainer
+    <MainSection
       onClick={onClickContainer}
     >
-      <Header
-        showUserMenu={showUserMenu}
-        setShowUserMenu={setShowUserMenu}
-      />
-      <Outlet />
-    </MainContainer>
+      <Sidebar />
+
+      <MainContainer>
+        <Header
+          showUserMenu={showUserMenu}
+          setShowUserMenu={setShowUserMenu}
+        />
+        <MainContent>
+          <Outlet />
+        </MainContent>
+      </MainContainer>
+    </MainSection>
   )
 }
