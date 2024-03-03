@@ -62,7 +62,6 @@ export const DropdownMenu = styled.div<{ show: string }>`
   background-color: ${({ theme }) => theme.color.white};
   right: 1rem;
   z-index: 1;
-  margin-top: 1rem;
   padding: 2rem;
   font-size: 1.5rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
