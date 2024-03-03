@@ -40,7 +40,10 @@ export const Header = ({ showUserMenu, setShowUserMenu }: Props) => {
             </Link>
           </LogoContainer>
 
-          <UserMenuContainer>
+          <UserMenuContainer
+            onMouseEnter={()=> setShowUserMenu(true)}
+            onMouseLeave={()=> setShowUserMenu(false)}
+          >
             <UserButton
               type='button'
               onClick={() => setShowUserMenu(!showUserMenu)}
